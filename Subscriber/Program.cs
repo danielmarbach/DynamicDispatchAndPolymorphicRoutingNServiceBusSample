@@ -1,5 +1,5 @@
 ﻿var endpointConfiguration = new EndpointConfiguration("PolymorphicRouting.Subscriber");
-
+endpointConfiguration.EnableInstallers();
 endpointConfiguration.UseSerialization<SystemJsonSerializer>();
 
 var transport = new AzureServiceBusTransport(Environment.GetEnvironmentVariable("AzureServiceBus_ConnectionString"))

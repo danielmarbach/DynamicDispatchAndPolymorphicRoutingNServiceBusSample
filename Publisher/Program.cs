@@ -1,7 +1,7 @@
 ﻿using Messages;
 
 var endpointConfiguration = new EndpointConfiguration("PolymorphicRouting.Publisher");
-
+endpointConfiguration.EnableInstallers();
 endpointConfiguration.UseSerialization<SystemJsonSerializer>();
 
 var transport = new AzureServiceBusTransport(Environment.GetEnvironmentVariable("AzureServiceBus_ConnectionString"))
@@ -19,13 +19,13 @@ var userCreated = new UserCreated
 
 await endpointInstance.Publish(userCreated);
 
-// var userCreatedFromCampaign = new UserCreatedFromCampaign()
-// {
-//     UserId = Guid.NewGuid(),
-//     CampaignId = Guid.NewGuid(),
-// };
-//
-// await endpointInstance.Publish(userCreatedFromCampaign);
+var userCreatedFromCampaign = new UserCreatedFromCampaign()
+{
+    UserId = Guid.NewGuid(),
+    CampaignId = Guid.NewGuid(),
+};
+
+await endpointInstance.Publish(userCreatedFromCampaign);
 
 Console.WriteLine("Press Enter to exit...");
 Console.ReadLine();
